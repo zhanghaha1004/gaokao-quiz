@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>测评报告 | 高考专业性格测评</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif}
+    :root{
+      --primary:#4A7BFC;
+      --primary-light:#5A93FF;
+      --primary-gradient:linear-gradient(90deg,#4A7BFC,#5A93FF);
+      --primary-bg:linear-gradient(135deg,#f5f7fa 0%,#e4eaf5 100%);
+      --youth-orange:#FF9A76;
+      --neutral-100:#FFFFFF;
+      --neutral-200:#F9FAFB;
+      --neutral-300:#E5E7EB;
+      --neutral-400:#9CA3AF;
+      --neutral-500:#6B7280;
+      --neutral-600:#4B5563;
+      --neutral-700:#374151;
+      --neutral-800:#1F2937;
+      --radius-sm:8px;
+      --radius-md:16px;
+      --radius-lg:24px;
+      --radius-xl:50px;
+      --shadow-sm:0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md:0 6px 16px rgba(0,0,0,0.06);
+      --shadow-lg:0 10px 30px rgba(0,0,0,0.08);
+      --transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --primary-bg:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);
+        --neutral-100:#1F2937;
+        --neutral-200:#374151;
+        --neutral-300:#4B5563;
+        --neutral-400:#9CA3AF;
+        --neutral-500:#E5E7EB;
+        --neutral-600:#F9FAFB;
+        --neutral-700:#FFFFFF;
+        --neutral-800:#FFFFFF;
+      }
+      .major-item{background:#374151 !important}
+      .job-item{background:#374151 !important}
+    }
+    body{
+      background:var(--primary-bg);
+      min-height:100vh;
+      padding:16px;
+      color:var(--neutral-800);
+      transition:var(--transition);
+    }
+    .container{max-width:750px;margin:0 auto;padding:16px 0}
+    .card{
+      background:var(--neutral-100);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-md);
+      transition:var(--transition);
+      overflow:hidden;
+      position:relative;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      background:var(--primary-gradient);
+      color:var(--neutral-100);
+      border:none;
+      border-radius:var(--radius-xl);
+      font-size:16px;
+      font-weight:500;
+      cursor:pointer;
+      transition:var(--transition);
+      padding:16px 48px;
+      box-shadow:0 8px 20px rgba(74,123,252,0.2);
+      min-height:44px;
+      min-width:88px;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(74,123,252,0.25)}
+    .btn-sm{padding:12px 32px;font-size:14px}
+    .result-card{padding:40px 32px;margin-bottom:24px}
+    .result-header{text-align:center;margin-bottom:40px}
+    .result-badge{
+      display:inline-block;
+      background:var(--primary-gradient);
+      color:#fff;
+      padding:8px 24px;
+      border-radius:var(--radius-xl);
+      font-size:16px;
+      font-weight:500;
+      margin-bottom:16px;
+      box-shadow:0 4px 12px rgba(74,123,252,0.2);
+    }
+    .result-card.D{
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><path d="M20,40 Q40,20 60,40 Q40,60 20,40" fill="none" stroke="%23FF9A76" stroke-width="1" opacity="0.1"/></svg>');
+      background-repeat:no-repeat;background-position:center;background-size:200px;
+    }
+    .result-card.E{
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect x="20" y="20" width="40" height="40" fill="none" stroke="%2366CC99" stroke-width="1" opacity="0.1"/></svg>');
+      background-repeat:no-repeat;background-position:center;background-size:200px;
+    }
+    .result-card.F{
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><polygon points="40,10 70,70 10,70" fill="none" stroke="%234A7BFC" stroke-width="1" opacity="0.1"/></svg>');
+      background-repeat:no-repeat;background-position:center;background-size:200px;
+    }
+    .result-title{font-size:28px;font-weight:700;color:var(--neutral-800);margin-bottom:12px}
+    .result-advantage{
+      background:#f0f7ff;
+      color:var(--primary);
+      padding:12px 20px;
+      border-radius:var(--radius-md);
+      font-size:14px;
+      margin:16px auto;
+      max-width:600px;
+      line-height:1.6;
+    }
+    .result-desc{font-size:16px;color:var(--neutral-500);line-height:1.6;max-width:600px;margin:0 auto}
+    .section{margin-bottom:36px}
+    .section-title{
+      display:flex;align-items:center;gap:8px;
+      font-size:18px;font-weight:600;color:var(--neutral-800);
+      margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--neutral-200);
+      flex-wrap:wrap;
+    }
+    .section-title i{color:var(--primary)}
+    .major-tabs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:8px}
+    .major-tab{
+      padding:8px 16px;background:var(--neutral-200);
+      border-radius:var(--radius-sm);
+      font-size:14px;color:var(--neutral-600);
+      cursor:pointer;white-space:nowrap;transition:var(--transition);
+      min-height:44px;display:flex;align-items:center;justify-content:center;
+      user-select:none;
+    }
+    .major-tab.active{background:var(--primary);color:#fff}
+    .major-list{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+    .major-item{
+      background:#f4f7ff;color:var(--primary);
+      padding:12px 20px;border-radius:var(--radius-md);
+      font-size:15px;transition:var(--transition);
+      display:flex;align-items:center;gap:6px;position:relative;
+      cursor:pointer;user-select:none;
+    }
+    .major-item:hover{background:#e0e9ff;transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .major-item.top3{border:2px solid var(--youth-orange);animation:pulse 2s infinite}
+    .major-item .copy-icon{opacity:0;transition:var(--transition);margin-left:8px}
+    .major-item:hover .copy-icon{opacity:1}
+    .job-box{background:var(--neutral-200);border-radius:var(--radius-md);padding:24px}
+    .job-item{
+      padding:20px;background:#fff;border-radius:var(--radius-sm);
+      margin-bottom:12px;transition:var(--transition);cursor:pointer;
+    }
+    .job-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .job-item:last-child{margin-bottom:0}
+    .job-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:12px}
+    .job-name{font-weight:600;color:var(--neutral-800);font-size:16px}
+    .job-tag{font-size:12px;padding:4px 8px;background:#e0e9ff;color:var(--primary);border-radius:var(--radius-sm);white-space:nowrap}
+    .job-desc{font-size:14px;color:var(--neutral-500);line-height:1.6}
+    .job-detail{
+      margin-top:12px;padding-top:12px;border-top:1px solid var(--neutral-300);
+      font-size:13px;color:var(--neutral-600);display:none;
+    }
+    .job-detail.show{display:block}
+    .restart-wrap{text-align:center;margin-top:40px}
+    .toast{
+      position:fixed;top:20px;left:50%;
+      transform:translateX(-50%);
+      background:var(--neutral-800);
+      color:#fff;padding:12px 24px;border-radius:var(--radius-md);
+      font-size:14px;z-index:1000;opacity:0;
+      transition:opacity 0.3s ease;
+      max-width:90vw;
+    }
+    .toast.show{opacity:1}
+    .modal{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,0.5);
+      display:none;
+      align-items:center;justify-content:center;
+      z-index:1000;
+    }
+    .modal-content{
+      background:var(--neutral-100);
+      border-radius:var(--radius-lg);
+      padding:24px;max-width:90%;width:400px;
+      max-height:80vh;overflow-y:auto;
+      animation:fadeIn 0.3s ease;
+    }
+    .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px}
+    .modal-title{font-size:18px;font-weight:600;color:var(--neutral-800)}
+    .modal-close{cursor:pointer;color:var(--neutral-500);font-size:20px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+    .modal-body{font-size:14px;line-height:1.6;color:var(--neutral-600)}
+    .modal-footer{margin-top:24px;text-align:right}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @media (max-width:768px){
+      .result-title{font-size:24px}
+      .result-card{padding:32px 20px}
+    }
+    @media (max-width:480px){
+      body{padding:8px}
+      .btn{padding:14px 32px;width:100%}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="result-card card" id="resultCard">
+      <div class="result-header">
+        <div class="result-badge" id="resultBadge">性格类型</div>
+        <h2 class="result-title" id="typeName">加载中…</h2>
+        <div class="result-advantage" id="resultAdvantage">正在加载测评报告…</div>
+        <p class="result-desc" id="resultDesc"></p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-book"></i> 适合专业
+        </div>
+        <div class="major-tabs">
+          <div class="major-tab active" onclick="switchMajor(event,'arts')" tabindex="0">文科</div>
+          <div class="major-tab" onclick="switchMajor(event,'science')" tabindex="0">理科</div>
+        </div>
+        <div class="major-list" id="majorListArts"></div>
+        <div class="major-list" id="majorListScience" style="display:none;"></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-briefcase"></i> 就业方向 & 前景
+        </div>
+        <div class="job-box" id="jobBox"></div>
+      </div>
+
+      <div class="restart-wrap">
+        <p style="font-size:14px;color:var(--neutral-400);margin-bottom:16px;">本测评已完成，如需再次测评请重新购买</p>
+        <button class="btn btn-sm" onclick="goToPurchase()" tabindex="0"><i class="fas fa-shopping-cart"></i> 再次购买测评</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="purchaseModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">再次测评需购买</div>
+        <div class="modal-close" onclick="closeModal('purchaseModal')" tabindex="0">&times;</div>
+      </div>
+      <div class="modal-body">
+        <p>您已完成本次测评，再次测评需购买新的凭证。</p>
+        <p style="font-weight: bold; color: var(--primary); margin-top: 8px;">模拟价格：¥9.9</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm" onclick="simulatePurchase()" tabindex="0">模拟购买</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let selectedMajorType = 'arts';
+    let currentToken = '';
+
+    document.addEventListener('DOMContentLoaded', function(){
+      const urlParams = new URLSearchParams(window.location.search);
+      currentToken = urlParams.get('token') || '';
+      if (!currentToken) {
+        showToast('缺少测评凭证');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2000);
+        return;
+      }
+      loadReport();
+    });
+
+    async function loadReport() {
+      try {
+        const res = await fetch(`/api/get-report?token=${currentToken}`);
+        const data = await res.json();
+        if (data.code !== 200 || !data.data) {
+          showToast(data.msg || '暂无测评报告');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 2000);
+          return;
+        }
+
+        const report = data.data;
+        document.getElementById('resultBadge').innerText = `你的性格类型：${report.name}`;
+        document.getElementById('typeName').innerText = report.name;
+        document.getElementById('resultAdvantage').innerText = report.advantage;
+        document.getElementById('resultDesc').innerText = report.desc;
+        document.getElementById('resultCard').className = `result-card card ${report.type}`;
+
+        renderMajorList(report.majors.arts, document.getElementById('majorListArts'));
+        renderMajorList(report.majors.science, document.getElementById('majorListScience'));
+        renderJobList(report.jobs);
+
+      } catch (err) {
+        showToast('加载失败：' + err.message);
+      }
+    }
+
+    function renderMajorList(majors, container){
+      container.innerHTML = majors.map((m, index) => `
+        <div class="major-item ${index < 3 ? 'top3' : ''}" onclick="copyMajorName('${escapeQuotes(m)}')">
+          <i class="fas fa-check-circle"></i> ${m}
+          <i class="fas fa-copy copy-icon" onclick="event.stopPropagation(); copyMajorName('${escapeQuotes(m)}')"></i>
+        </div>
+      `).join('');
+    }
+
+    function renderJobList(jobs){
+      document.getElementById('jobBox').innerHTML = jobs.map(j => `
+        <div class="job-item" onclick="toggleJobDetail(this)">
+          <div class="job-header">
+            <div class="job-name">${j.name}</div>
+            <div class="job-tag">${j.tag}</div>
+          </div>
+          <div class="job-desc">${j.desc}</div>
+          <div class="job-detail">${j.detail}</div>
+        </div>
+      `).join('');
+    }
+
+    function switchMajor(e, type){
+      selectedMajorType = type;
+      document.querySelectorAll('.major-tab').forEach(tab => tab.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      if (type === 'arts'){
+        document.getElementById('majorListArts').style.display = 'flex';
+        document.getElementById('majorListScience').style.display = 'none';
+      } else {
+        document.getElementById('majorListArts').style.display = 'none';
+        document.getElementById('majorListScience').style.display = 'flex';
+      }
+      showToast(`已切换至${type === 'arts' ? '文科' : '理科'}专业列表`);
+    }
+
+    function copyMajorName(name){
+      if (!navigator.clipboard){
+        showToast('当前环境不支持一键复制，请手动复制');
+        return;
+      }
+      navigator.clipboard.writeText(name).then(()=>{
+        showToast(`已复制：${name}`);
+      }).catch(()=>{
+        showToast('复制失败，请手动复制');
+      });
+    }
+
+    function toggleJobDetail(el){
+      const detail = el.querySelector('.job-detail');
+      if (detail) detail.classList.toggle('show');
+    }
+
+    function goToPurchase(){
+      document.getElementById('purchaseModal').style.display = 'flex';
+    }
+
+    async function simulatePurchase() {
+      try {
+        const res = await fetch('/api/generate-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.code === 200) {
+          closeModal('purchaseModal');
+          showToast('购买成功！即将进入新测评');
+          window.location.href = data.data.accessUrl;
+        } else {
+          showToast(data.msg);
+        }
+      } catch (err) {
+        showToast('购买失败：' + err.message);
+      }
+    }
+
+    function closeModal(id){
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function showToast(msg){
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove('show'), 1800);
+    }
+
+    function escapeQuotes(str){
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+  </script>
+</body>
+</html>

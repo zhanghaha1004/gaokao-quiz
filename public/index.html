@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高考专业性格测评 | 精准匹配适合你的大学专业</title>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.bootcdn.net/ajax/libs/vibes/0.5.2/vibes.min.js"></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif}
+    :root{
+      --primary:#4A7BFC;
+      --primary-light:#5A93FF;
+      --primary-gradient:linear-gradient(90deg,#4A7BFC,#5A93FF);
+      --primary-bg:linear-gradient(135deg,#f5f7fa 0%,#e4eaf5 100%);
+      --youth-orange:#FF9A76;
+      --youth-green:#66CC99;
+      --success:#36D399;
+      --warning:#FBBD23;
+      --danger:#F87272;
+      --neutral-100:#FFFFFF;
+      --neutral-200:#F9FAFB;
+      --neutral-300:#E5E7EB;
+      --neutral-400:#9CA3AF;
+      --neutral-500:#6B7280;
+      --neutral-600:#4B5563;
+      --neutral-700:#374151;
+      --neutral-800:#1F2937;
+      --radius-sm:8px;
+      --radius-md:16px;
+      --radius-lg:24px;
+      --radius-xl:50px;
+      --shadow-sm:0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md:0 6px 16px rgba(0,0,0,0.06);
+      --shadow-lg:0 10px 30px rgba(0,0,0,0.08);
+      --transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+      --fast-transition:all 0.15s ease;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --primary-bg:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);
+        --neutral-100:#1F2937;
+        --neutral-200:#374151;
+        --neutral-300:#4B5563;
+        --neutral-400:#9CA3AF;
+        --neutral-500:#E5E7EB;
+        --neutral-600:#F9FAFB;
+        --neutral-700:#FFFFFF;
+        --neutral-800:#FFFFFF;
+      }
+      .major-item{background:#374151 !important}
+      .job-item{background:#374151 !important}
+    }
+    body{
+      background:var(--primary-bg);
+      min-height:100vh;
+      padding:16px;
+      color:var(--neutral-800);
+      transition:var(--transition);
+    }
+    .container{max-width:750px;margin:0 auto;padding:16px 0}
+    .card{
+      background:var(--neutral-100);
+      border-radius:var(--radius-lg);
+      box-shadow:var(--shadow-md);
+      transition:var(--transition);
+      overflow:hidden;
+      position:relative;
+    }
+    .card:hover{box-shadow:var(--shadow-lg)}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      background:var(--primary-gradient);
+      color:var(--neutral-100);
+      border:none;
+      border-radius:var(--radius-xl);
+      font-size:16px;
+      font-weight:500;
+      cursor:pointer;
+      transition:var(--transition);
+      padding:16px 48px;
+      box-shadow:0 8px 20px rgba(74,123,252,0.2);
+      min-height:44px;
+      min-width:88px;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(74,123,252,0.25)}
+    .btn:active{transform:translateY(0)}
+    .btn-sm{padding:12px 32px;font-size:14px}
+    .tip-bubble{
+      position:absolute;
+      background:var(--primary);
+      color:#fff;
+      padding:8px 16px;
+      border-radius:var(--radius-md);
+      font-size:12px;
+      z-index:1000;
+      box-shadow:var(--shadow-md);
+      animation:fadeIn 0.3s ease;
+      max-width:240px;
+    }
+    .tip-bubble::after{
+      content:'';
+      position:absolute;
+      width:8px;
+      height:8px;
+      background:var(--primary);
+      transform:rotate(45deg);
+    }
+    @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+    .pulse{animation:pulse 2s infinite}
+    .start-box{
+      text-align:center;
+      padding:60px 32px;
+      margin-bottom:24px;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%234A7BFC" stroke-width="0.5" opacity="0.1"/></svg>');
+      background-repeat:repeat;
+      background-size:200px;
+    }
+    .start-header{margin-bottom:40px}
+    .start-logo{
+      width:80px;height:80px;margin:0 auto 24px;
+      background:var(--primary-gradient);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:32px;position:relative;
+    }
+    .start-logo::after{
+      content:'';
+      position:absolute;
+      width:90px;height:90px;
+      border:2px solid var(--primary-light);
+      border-radius:50%;
+      opacity:0.5;
+      animation:pulse 3s infinite;
+    }
+    .start-title{font-size:32px;font-weight:700;color:var(--neutral-800);margin-bottom:16px;line-height:1.3}
+    .start-title span{color:var(--youth-orange)}
+    .start-desc{font-size:16px;color:var(--neutral-500);line-height:1.6;max-width:500px;margin:0 auto 48px}
+    .start-tips{font-size:14px;color:var(--neutral-400);margin-top:24px}
+    .test-box{display:none;padding:16px 0;position:relative}
+    .test-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    .test-back{
+      display:flex;align-items:center;gap:4px;
+      color:var(--neutral-500);font-size:14px;cursor:pointer;
+      min-height:44px;padding:8px 12px;
+    }
+    .test-controls{display:flex;gap:12px}
+    .test-btn{
+      font-size:14px;padding:8px 16px;
+      background:var(--neutral-200);
+      border-radius:var(--radius-sm);
+      color:var(--neutral-600);
+      cursor:pointer;transition:var(--fast-transition);
+      min-height:44px;display:flex;align-items:center;gap:6px;
+      user-select:none;
+    }
+    .test-btn:hover{background:var(--neutral-300)}
+    .progress-container{margin-bottom:32px}
+    .progress-info{
+      display:flex;justify-content:space-between;align-items:center;
+      font-size:14px;color:var(--neutral-500);margin-bottom:8px;
+    }
+    .progress-time{color:var(--primary);font-weight:500}
+    .progress-bar{height:6px;background:var(--neutral-300);border-radius:var(--radius-sm);overflow:hidden}
+    .progress-fill{height:100%;background:var(--primary-gradient);width:0%;transition:width 0.4s ease;border-radius:var(--radius-sm)}
+    .question-card{padding:32px;margin-bottom:24px}
+    .question-number{
+      font-size:14px;color:var(--primary);font-weight:500;margin-bottom:16px;
+      display:flex;justify-content:space-between;
+    }
+    .question-mark{color:var(--warning);cursor:pointer}
+    .question-content{
+      font-size:20px;line-height:1.6;color:var(--neutral-800);
+      text-align:center;margin-bottom:8px;
+    }
+    .question-tips{font-size:12px;color:var(--neutral-400);text-align:center}
+    .options{display:flex;flex-direction:column;gap:12px;margin-top:32px}
+    .option{
+      background:var(--neutral-200);
+      padding:20px 16px;
+      border-radius:var(--radius-md);
+      text-align:center;
+      cursor:pointer;
+      transition:var(--fast-transition);
+      border:2px solid transparent;
+      font-size:16px;
+      color:var(--neutral-700);
+      min-height:60px;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+      user-select:none;
+    }
+    .option:hover{background:#edf2ff;border-color:#d1e0ff;transform:translateY(-2px)}
+    .option:active{transform:translateY(0)}
+    .option.selected{
+      background:var(--primary-light);
+      color:#fff;
+      border-color:var(--primary);
+      box-shadow:0 4px 12px rgba(74,123,252,0.2);
+    }
+    .option.selected::after{
+      content:'✓';
+      position:absolute;
+      right:20px;
+      font-weight:bold;
+    }
+    .bottom-anchor{
+      position:fixed;bottom:0;left:0;right:0;
+      background:var(--neutral-100);
+      padding:12px;
+      box-shadow:0 -2px 10px rgba(0,0,0,0.05);
+      display:none;
+      justify-content:space-between;
+      align-items:center;
+      z-index:90;
+    }
+    .anchor-progress{font-size:14px;color:var(--neutral-600)}
+    .anchor-btns{display:flex;gap:8px}
+    .loading-box{display:none;padding:60px 32px;text-align:center}
+    .loading-spinner{
+      width:48px;height:48px;
+      border:4px solid #e0e9ff;
+      border-top:4px solid var(--primary);
+      border-radius:50%;
+      animation:spin 1s linear infinite;
+      margin:0 auto 24px;
+    }
+    .loading-text{font-size:16px;color:var(--neutral-600);margin-bottom:8px}
+    .loading-desc{font-size:14px;color:var(--neutral-500)}
+    .loading-fun{font-size:14px;color:var(--youth-orange);font-weight:500;margin-top:12px}
+    .result-box{display:none;padding:16px 0}
+    .result-card{padding:40px 32px;margin-bottom:24px}
+    .result-header{text-align:center;margin-bottom:40px}
+    .result-badge{
+      display:inline-block;
+      background:var(--primary-gradient);
+      color:#fff;
+      padding:8px 24px;
+      border-radius:var(--radius-xl);
+      font-size:16px;
+      font-weight:500;
+      margin-bottom:16px;
+      box-shadow:0 4px 12px rgba(74,123,252,0.2);
+    }
+    .result-card.D{
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><path d="M20,40 Q40,20 60,40 Q40,60 20,40" fill="none" stroke="%23FF9A76" stroke-width="1" opacity="0.1"/></svg>');
+      background-repeat:no-repeat;background-position:center;background-size:200px;
+    }
+    .result-card.E{
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect x="20" y="20" width="40" height="40" fill="none" stroke="%2366CC99" stroke-width="1" opacity="0.1"/></svg>');
+      background-repeat:no-repeat;background-position:center;background-size:200px;
+    }
+    .result-card.F{
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><polygon points="40,10 70,70 10,70" fill="none" stroke="%234A7BFC" stroke-width="1" opacity="0.1"/></svg>');
+      background-repeat:no-repeat;background-position:center;background-size:200px;
+    }
+    .result-title{font-size:28px;font-weight:700;color:var(--neutral-800);margin-bottom:12px}
+    .result-advantage{
+      background:#f0f7ff;
+      color:var(--primary);
+      padding:12px 20px;
+      border-radius:var(--radius-md);
+      font-size:14px;
+      margin:16px auto;
+      max-width:600px;
+      line-height:1.6;
+    }
+    .result-desc{font-size:16px;color:var(--neutral-500);line-height:1.6;max-width:600px;margin:0 auto}
+    .section{margin-bottom:36px}
+    .section-title{
+      display:flex;align-items:center;gap:8px;
+      font-size:18px;font-weight:600;color:var(--neutral-800);
+      margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid var(--neutral-200);
+      flex-wrap:wrap;
+    }
+    .section-title i{color:var(--primary)}
+    .section-help{font-size:12px;color:var(--neutral-400);margin-left:8px;cursor:pointer}
+    .major-tabs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:8px}
+    .major-tab{
+      padding:8px 16px;background:var(--neutral-200);
+      border-radius:var(--radius-sm);
+      font-size:14px;color:var(--neutral-600);
+      cursor:pointer;white-space:nowrap;transition:var(--transition);
+      min-height:44px;display:flex;align-items:center;justify-content:center;
+      user-select:none;
+    }
+    .major-tab.active{background:var(--primary);color:#fff}
+    .major-list{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+    .major-item{
+      background:#f4f7ff;color:var(--primary);
+      padding:12px 20px;border-radius:var(--radius-md);
+      font-size:15px;transition:var(--transition);
+      display:flex;align-items:center;gap:6px;position:relative;
+      cursor:pointer;user-select:none;
+    }
+    .major-item:hover{background:#e0e9ff;transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .major-item.top3{border:2px solid var(--youth-orange);animation:pulse 3s infinite}
+    .major-item .copy-icon{opacity:0;transition:var(--fast-transition);margin-left:8px}
+    .major-item:hover .copy-icon{opacity:1}
+    .job-box{background:var(--neutral-200);border-radius:var(--radius-md);padding:24px}
+    .job-item{
+      padding:20px;background:#fff;border-radius:var(--radius-sm);
+      margin-bottom:12px;transition:var(--transition);cursor:pointer;
+    }
+    .job-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .job-item:last-child{margin-bottom:0}
+    .job-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:12px}
+    .job-name{font-weight:600;color:var(--neutral-800);font-size:16px}
+    .job-tag{font-size:12px;padding:4px 8px;background:#e0e9ff;color:var(--primary);border-radius:var(--radius-sm);white-space:nowrap}
+    .job-desc{font-size:14px;color:var(--neutral-500);line-height:1.6}
+    .job-detail{
+      margin-top:12px;padding-top:12px;border-top:1px solid var(--neutral-300);
+      font-size:13px;color:var(--neutral-600);display:none;
+    }
+    .job-detail.show{display:block}
+    .restart-wrap{text-align:center;margin-top:40px}
+    .font-control{
+      position:fixed;top:20px;right:20px;z-index:99;
+      display:flex;gap:8px;background:var(--neutral-100);
+      padding:8px;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);
+    }
+    .font-btn{
+      width:32px;height:32px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      background:var(--neutral-200);color:var(--neutral-600);
+      cursor:pointer;transition:var(--fast-transition);user-select:none;
+      font-size:12px;
+    }
+    .font-btn:hover{background:var(--neutral-300)}
+    @media (max-width:768px){
+      .start-title{font-size:26px}
+      .question-content{font-size:18px}
+      .result-title{font-size:24px}
+      .result-card{padding:32px 20px}
+      .question-card{padding:24px 20px}
+      .bottom-anchor{display:flex}
+    }
+    @media (max-width:480px){
+      body{padding:8px;padding-bottom:80px}
+      .btn{padding:14px 32px;width:100%}
+      .start-box{padding:40px 20px}
+      .section-title{font-size:16px}
+      .job-item{padding:16px}
+      .font-control{top:auto;bottom:80px}
+    }
+    .modal{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,0.5);
+      display:none;
+      align-items:center;justify-content:center;
+      z-index:1000;
+    }
+    .modal-content{
+      background:var(--neutral-100);
+      border-radius:var(--radius-lg);
+      padding:24px;max-width:90%;width:400px;
+      max-height:80vh;overflow-y:auto;
+      animation:fadeIn 0.3s ease;
+    }
+    .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px}
+    .modal-title{font-size:18px;font-weight:600;color:var(--neutral-800)}
+    .modal-close{cursor:pointer;color:var(--neutral-500);font-size:20px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+    .modal-body{font-size:14px;line-height:1.6;color:var(--neutral-600)}
+    .modal-footer{margin-top:24px;text-align:right}
+    .toast{
+      position:fixed;top:20px;left:50%;
+      transform:translateX(-50%);
+      background:var(--neutral-800);
+      color:#fff;padding:12px 24px;border-radius:var(--radius-md);
+      font-size:14px;z-index:1000;opacity:0;
+      transition:opacity 0.3s ease;
+      max-width:90vw;
+    }
+    .toast.show{opacity:1}
+    .purchase-modal .modal-body p {
+      line-height: 1.8;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="font-control">
+    <div class="font-btn" onclick="adjustFontSize(-1)" title="缩小字号"><i class="fas fa-font"></i><sub>A-</sub></div>
+    <div class="font-btn" onclick="adjustFontSize(0)" title="重置字号">A</div>
+    <div class="font-btn" onclick="adjustFontSize(1)" title="放大字号"><i class="fas fa-font"></i><sup>A+</sup></div>
+  </div>
+
+  <div class="container">
+    <!-- 开始页 -->
+    <div class="start-box card" id="startBox">
+      <div class="start-header">
+        <div class="start-logo"><i class="fas fa-graduation-cap"></i></div>
+        <h1 class="start-title">高考专业<span>性格测评</span></h1>
+        <p class="start-desc">基于你的性格特质，精准匹配适合的大学专业与职业方向，帮你做出更科学的升学选择</p>
+      </div>
+      <button class="btn" onclick="startTest()"><i class="fas fa-play"></i> 开始测评</button>
+      <p class="start-tips" id="startTips">测评共60题，预计耗时8-10分钟，请如实作答</p>
+    </div>
+
+    <!-- 答题页 -->
+    <div class="test-box" id="testBox">
+      <div class="test-header">
+        <div class="test-back" onclick="restart()" tabindex="0"><i class="fas fa-arrow-left"></i> 返回首页</div>
+        <div class="test-controls">
+          <div class="test-btn" onclick="saveProgress()" tabindex="0"><i class="fas fa-save"></i> 保存进度</div>
+          <div class="test-btn" onclick="showMarkedQuestions()" tabindex="0"><i class="fas fa-bookmark"></i> 标记题</div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-info">
+          <span id="progressCurrent">第1题</span>
+          <span class="progress-time" id="progressTime">预计剩余10分钟</span>
+          <span id="progressTotal">共60题</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="question-card card">
+        <div class="question-number">
+          <span id="questionNumber">题目 1/60</span>
+          <span class="question-mark" onclick="markQuestion()" tabindex="0"><i class="fas fa-flag"></i> 标记</span>
+        </div>
+        <div class="question-content" id="questionContent"></div>
+        <div class="question-tips">请根据自身实际情况选择</div>
+      </div>
+
+      <div class="options" id="optionsBox">
+        <div class="option" onclick="selectScore(event,1)" tabindex="0">非常不符合</div>
+        <div class="option" onclick="selectScore(event,2)" tabindex="0">不太符合</div>
+        <div class="option" onclick="selectScore(event,3)" tabindex="0">一般</div>
+        <div class="option" onclick="selectScore(event,4)" tabindex="0">比较符合</div>
+        <div class="option" onclick="selectScore(event,5)" tabindex="0">非常符合</div>
+      </div>
+    </div>
+
+    <!-- 底部进度锚点 -->
+    <div class="bottom-anchor">
+      <div class="anchor-progress" id="anchorProgress">1/60 题</div>
+      <div class="anchor-btns">
+        <div class="test-btn" onclick="prevQuestion()" tabindex="0" title="上一题"><i class="fas fa-chevron-left"></i></div>
+        <div class="test-btn" onclick="nextQuestion()" tabindex="0" title="下一题"><i class="fas fa-chevron-right"></i></div>
+      </div>
+    </div>
+
+    <!-- 加载页 -->
+    <div class="loading-box card" id="loadingBox">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">正在分析你的测评结果</div>
+      <div class="loading-desc">我们将根据你的性格特质匹配最适合的专业</div>
+      <div class="loading-fun" id="loadingFun">你的性格密码正在破译中…</div>
+    </div>
+
+    <!-- 结果页（答题页内的临时结果，最终会提交到后端） -->
+    <div class="result-box" id="resultBox">
+      <div class="result-card card" id="resultCard">
+        <div class="result-header">
+          <div class="result-badge" id="resultBadge">性格类型</div>
+          <h2 class="result-title" id="typeName">社交主导型</h2>
+          <div class="result-advantage" id="resultAdvantage">✨ 你的性格优势：擅长沟通表达，共情力强，在人际交往中总能快速建立信任</div>
+          <p class="result-desc" id="resultDesc">擅长沟通表达、共情力强，喜欢与人打交道，适合服务、传播、教育类方向。</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            <i class="fas fa-book"></i> 适合专业
+            <span class="section-help" onclick="showMajorHelp()" tabindex="0">💡 长按/右键专业查看提示</span>
+          </div>
+          <div class="major-tabs">
+            <div class="major-tab active" onclick="switchMajor(event,'arts')" tabindex="0">文科</div>
+            <div class="major-tab" onclick="switchMajor(event,'science')" tabindex="0">理科</div>
+          </div>
+          <div class="major-list" id="majorListArts"></div>
+          <div class="major-list" id="majorListScience" style="display:none;"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            <i class="fas fa-briefcase"></i> 就业方向 & 前景
+          </div>
+          <div class="job-box" id="jobBox"></div>
+        </div>
+
+        <div class="restart-wrap">
+          <button class="btn btn-sm" onclick="restart()" tabindex="0"><i class="fas fa-redo"></i> 重新测评</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 专业帮助弹窗 -->
+  <div class="modal" id="majorModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">专业选择小提示</div>
+        <div class="modal-close" onclick="closeModal('majorModal')" tabindex="0">&times;</div>
+      </div>
+      <div class="modal-body">
+        <p>1. 专业热度基于示例数据排序，TOP3为核心推荐；</p>
+        <p>2. 点击专业旁复制图标可一键复制专业名称；</p>
+        <p>3. 该页面为演示用测评，不构成专业报考建议；</p>
+        <p>4. 文理科专业可结合自身选科与院校要求综合判断。</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm" onclick="closeModal('majorModal')" tabindex="0">我知道了</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 购买弹窗（对接后端生成token） -->
+  <div class="modal purchase-modal" id="purchaseModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">继续测评需购买</div>
+        <div class="modal-close" onclick="closeModal('purchaseModal')" tabindex="0">&times;</div>
+      </div>
+      <div class="modal-body">
+        <p>您需要购买后才能获得唯一的测评凭证，仅可答题一次。</p>
+        <p style="font-weight: bold; color: var(--primary); margin-top: 8px;">模拟价格：¥9.9</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm" onclick="simulatePurchase()" tabindex="0">模拟购买</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- token无效弹窗 -->
+  <div class="modal" id="invalidTokenModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">答题凭证无效</div>
+        <div class="modal-close" onclick="closeModal('invalidTokenModal')" tabindex="0">&times;</div>
+      </div>
+      <div class="modal-body">
+        <p>你的答题凭证已失效或不存在，请重新购买测评权限。</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-sm" onclick="simulatePurchase()" tabindex="0">立即购买</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== 原有题库、配置保持不变 =====
+    const questions = [
+      { title: "班级组织活动时，我会主动承担沟通协调的角色", type: "A" },
+      { title: "和同学发生矛盾时，我能快速理解对方的想法并化解", type: "A" },
+      { title: "我喜欢在课堂上主动发言，分享自己的观点", type: "A" },
+      { title: "做小组作业时，我更愿意负责对外沟通而非埋头做事", type: "A" },
+      { title: "我能轻松记住同学的喜好和性格特点", type: "A" },
+      { title: "我享受帮助他人解决问题后带来的成就感", type: "A" },
+      { title: "我擅长说服别人接受我的合理建议", type: "A" },
+      { title: "参加聚会或集体活动会让我感到精力充沛", type: "A" },
+      { title: "我愿意做需要频繁与人打交道的兼职", type: "A" },
+      { title: "我能快速适应新的社交环境并交到朋友", type: "A" },
+
+      { title: "解数学难题时，我会享受推理和验证的过程", type: "B" },
+      { title: "遇到问题时，我会先分析原因再找解决办法", type: "B" },
+      { title: "我能快速发现数据或表格中的错误", type: "B" },
+      { title: "我喜欢研究事物背后的原理和规律", type: "B" },
+      { title: "做决策时，我更相信数据而非直觉", type: "B" },
+      { title: "我能长时间专注做需要逻辑思考的题目", type: "B" },
+      { title: "我对数字和图表有天然的敏感度", type: "B" },
+      { title: "我喜欢用思维导图梳理复杂的知识点", type: "B" },
+      { title: "我能快速理解新的数学公式或物理定理", type: "B" },
+      { title: "我会主动寻找更高效的学习方法和解题思路", type: "B" },
+
+      { title: "我喜欢动手做实验，而非只看实验报告", type: "C" },
+      { title: "家里的小物件坏了，我会尝试自己修理", type: "C" },
+      { title: "我更愿意实地考察而非只看文字资料", type: "C" },
+      { title: "我喜欢组装模型、搭建积木等动手类活动", type: "C" },
+      { title: "学习新技能时，我更喜欢边做边学", type: "C" },
+      { title: "我享受将想法通过动手变成实物的过程", type: "C" },
+      { title: "我喜欢户外实践课胜过室内理论课", type: "C" },
+      { title: "我能快速掌握新工具的使用方法", type: "C" },
+      { title: "我更擅长操作类考试而非纯记忆类考试", type: "C" },
+      { title: "我喜欢拆解物品了解其内部结构", type: "C" },
+
+      { title: "班级要做宣传海报/短视频，我更愿意自己设计内容和风格", type: "D" },
+      { title: "写作文或文案时，我喜欢用独特的角度和表达方式", type: "D" },
+      { title: "看到别人的作品，我能很快看出哪里可以改得更好看", type: "D" },
+      { title: "我经常脑子里冒出新奇点子，并会记下来或试着做出来", type: "D" },
+      { title: "我更愿意做需要发挥想象力的任务，而非重复机械的事", type: "D" },
+      { title: "布置房间/整理桌面时，我会按自己的审美搭配", type: "D" },
+      { title: "我喜欢看创意短片、插画、摄影等艺术类内容", type: "D" },
+      { title: "同样一件事，我更愿意用新方法完成而非老一套", type: "D" },
+      { title: "我会主动参与文艺、设计、创作类社团或活动", type: "D" },
+      { title: "按固定模板完成任务会让我觉得无聊", type: "D" },
+
+      { title: "我习惯把笔记、试卷、资料分类整理，方便查找", type: "E" },
+      { title: "做事情前我会先列步骤或计划，不喜欢想到哪做到哪", type: "E" },
+      { title: "填写表格、统计数据时，我会仔细核对避免出错", type: "E" },
+      { title: "我喜欢有明确规则、流程清晰的环境", type: "E" },
+      { title: "别人交给我的任务，我会按要求认真完成不省略步骤", type: "E" },
+      { title: "我讨厌东西乱放，会主动整理得整齐有序", type: "E" },
+      { title: "我做事更看重准确稳妥，而非速度和新鲜感", type: "E" },
+      { title: "遇到事情我习惯按规矩处理，不喜欢凭感觉决定", type: "E" },
+      { title: "我适合做需要细心、耐心、严谨的工作", type: "E" },
+      { title: "生活和学习节奏稳定有规律，会让我更有安全感", type: "E" },
+
+      { title: "我愿意尝试新科目、新技能，即使一开始不擅长", type: "F" },
+      { title: "面对有难度的考试或竞赛，我更想挑战而非退缩", type: "F" },
+      { title: "我更喜欢有成长空间的环境，而非一成不变", type: "F" },
+      { title: "遇到新环境、新变化，我能较快适应", type: "F" },
+      { title: "我愿意为了更好的结果多付出努力，而非只求安稳", type: "F" },
+      { title: "我对新兴行业、热门方向更感兴趣", type: "F" },
+      { title: "做选择时，我更看重未来发展而非眼前舒服", type: "F" },
+      { title: "我喜欢有挑战性的任务，完成后有很强的成就感", type: "F" },
+      { title: "我不害怕竞争，反而会在竞争中更有动力", type: "F" },
+      { title: "一直重复同样的生活和学习内容，会让我觉得无聊", type: "F" }
+    ];
+
+    const typeConfig = {
+      A: {
+        name: "社交主导型",
+        desc: "擅长沟通表达、共情力强，喜欢与人打交道，适合服务、传播、教育类方向。",
+        advantage: "✨ 你的性格优势：擅长沟通表达，共情力强，在人际交往中总能快速建立信任",
+        majors: {
+          arts: ["汉语言文学","法学","教育学","市场营销","心理学","公共事业管理","新闻传播学","人力资源管理","旅游管理","国际商务","广告学","社会工作","外交学","播音与主持艺术"],
+          science: ["应用心理学","健康服务与管理","数字媒体技术","信息管理与信息系统","公共事业管理","市场营销","人力资源管理","旅游管理"]
+        },
+        jobs: [
+          {name:"记者/新媒体编辑", desc:"负责内容创作、采访、传播，适合表达能力强的人。", tag:"热门", detail:"平均薪资：6-12K/月；方向：媒体/品牌部/自媒体"},
+          {name:"教师/培训师", desc:"稳定、有成就感，适合耐心、善于讲解的人。", tag:"稳定", detail:"平均薪资：5-10K/月；方向：学校/培训机构/企业培训"},
+          {name:"人力资源/公关", desc:"负责协调、沟通、品牌维护，社交属性强。", tag:"高薪", detail:"平均薪资：7-15K/月；方向：HR/公关公司/品牌"},
+          {name:"心理咨询师", desc:"帮助他人解决情绪与心理问题，需求持续增长。", tag:"前景好", detail:"平均薪资：8-18K/月；方向：咨询机构/学校/企业EAP"}
+        ]
+      },
+      B: {
+        name: "逻辑主导型",
+        desc: "思维严谨、理性、擅长分析推理，对数字和规律敏感，适合理工、技术、研究类方向。",
+        advantage: "✨ 你的性格优势：逻辑思维缜密，数据分析能力强，能快速发现问题本质",
+        majors: {
+          arts: ["经济学","金融学","会计学","财务管理","统计学","国际经济与贸易","经济统计学","税收学","审计学"],
+          science: ["计算机科学与技术","电子信息工程","数学与应用数学","统计学","金融工程","软件工程","信息与计算科学","自动化","数据科学与大数据技术","物理学","人工智能","网络空间安全","微电子科学与工程"]
+        },
+        jobs: [
+          {name:"程序员/软件开发", desc:"市场需求大、薪资高，适合逻辑强、能沉下心的人。", tag:"高薪", detail:"平均薪资：10-30K/月；方向：互联网/科技企业"},
+          {name:"数据分析师/算法", desc:"互联网、金融核心岗位，发展空间极大。", tag:"热门", detail:"平均薪资：12-25K/月；方向：互联网/金融/咨询"},
+          {name:"科研/工程师", desc:"走学术或技术路线，专业性强。", tag:"稳定", detail:"平均薪资：8-20K/月；方向：科研院所/企业研发"},
+          {name:"金融分析师", desc:"在银行、证券、基金从事分析与决策。", tag:"前景好", detail:"平均薪资：15-50K/月；方向：券商/基金/银行"}
+        ]
+      },
+      C: {
+        name: "实操主导型",
+        desc: "动手能力强、喜欢实操、不喜欢空谈理论，适合工程、技术、现场执行类方向。",
+        advantage: "✨ 你的性格优势：动手能力突出，执行力强，能将想法快速落地为实际成果",
+        majors: {
+          arts: ["护理学","烹饪与营养教育","文物保护技术","酒店管理","会展经济与管理","家政学","物业管理"],
+          science: ["机械设计制造及其自动化","土木工程","电气工程及其自动化","自动化","临床医学","口腔医学","医学检验技术","软件工程","车辆工程","测绘工程","材料科学与工程","给排水科学与工程"]
+        },
+        jobs: [
+          {name:"工程师（机械/电气/自动化）", desc:"实业刚需，越老越吃香，就业稳定。", tag:"稳定", detail:"平均薪资：8-20K/月；方向：制造/工程企业"},
+          {name:"建筑/造价/施工管理", desc:"基建行业核心岗位，需求稳定。", tag:"热门", detail:"平均薪资：7-18K/月；方向：建筑公司/设计院"},
+          {name:"医疗技师/检验", desc:"医院刚需，工作稳定。", tag:"前景好", detail:"平均薪资：6-12K/月；方向：医院/检验机构"},
+          {name:"嵌入式/硬件开发", desc:"智能制造、物联网相关岗位。", tag:"高薪", detail:"平均薪资：10-25K/月；方向：智能硬件/科技企业"}
+        ]
+      },
+      D: {
+        name: "创意主导型",
+        desc: "想象力丰富、审美敏锐、喜欢新鲜与独特，适合设计、艺术、创作、传媒类方向。",
+        advantage: "✨ 你的性格优势：想象力丰富，审美独特，能创造出有温度、有特色的作品",
+        majors: {
+          arts: ["视觉传达设计","数字媒体艺术","广告学","汉语言文学","广播电视编导","产品设计","环境设计","动画","戏剧影视文学","艺术与科技","摄影","服装与服饰设计","书法学"],
+          science: ["数字媒体技术","视觉传达设计","产品设计","动画","艺术与科技","环境设计","服装设计与工程","工业设计"]
+        },
+        jobs: [
+          {name:"UI/平面/室内设计师", desc:"创意变现直接，需求广。", tag:"热门", detail:"平均薪资：7-20K/月；方向：设计公司/互联网/品牌方"},
+          {name:"摄影师/剪辑/编导", desc:"短视频时代需求量大。", tag:"高薪", detail:"平均薪资：6-25K/月；方向：传媒/广告/自媒体"},
+          {name:"文案/策划/创意", desc:"广告、新媒体、品牌核心岗位。", tag:"前景好", detail:"平均薪资：6-18K/月；方向：广告公司/品牌方"},
+          {name:"自媒体/艺术创作", desc:"适合长期发展，可打造个人IP。", tag:"自由", detail:"收入浮动大；方向：自由职业/文创企业"}
+        ]
+      },
+      E: {
+        name: "秩序主导型",
+        desc: "做事严谨、有条理、重视规则与稳定，适合财务、法律、行政、管理类稳定方向。",
+        advantage: "✨ 你的性格优势：做事严谨细致，遵守规则，能把复杂事务梳理得井井有条",
+        majors: {
+          arts: ["会计学","法学","财务管理","行政管理","档案学","税务学","审计学","劳动与社会保障","图书馆学"],
+          science: ["会计学","财务管理","法学","信息管理与信息系统","税务学","审计学","工程造价","工程管理"]
+        },
+        jobs: [
+          {name:"会计/财务/审计", desc:"所有企业必备岗位，越资深越值钱。", tag:"稳定", detail:"平均薪资：6-15K/月；方向：企业财务/事务所"},
+          {name:"律师/法务", desc:"专业性强，收入上限高。", tag:"高薪", detail:"平均薪资：8-50K/月；方向：律所/企业法务"},
+          {name:"公务员/行政/文职", desc:"稳定、福利好。", tag:"热门", detail:"平均薪资：5-10K/月；方向：机关/事业单位"},
+          {name:"风控/合规/档案管理", desc:"大企业与金融机构刚需。", tag:"前景好", detail:"平均薪资：7-15K/月；方向：银行/券商/大企业"}
+        ]
+      },
+      F: {
+        name: "冒险挑战型",
+        desc: "敢闯敢拼、喜欢变化、追求成长与收益，适合商业、经济、市场、创业类方向。",
+        advantage: "✨ 你的性格优势：敢于突破自我，适应能力强，在竞争中能快速成长",
+        majors: {
+          arts: ["经济学","工商管理","国际经济与贸易","市场营销","电子商务","投资学","商务英语","物流管理","会展经济与管理"],
+          science: ["经济学","大数据管理与应用","电子商务","工商管理","金融工程","国际经济与贸易","物流工程","工业工程"]
+        },
+        jobs: [
+          {name:"产品/运营/市场", desc:"成长快、晋升空间大。", tag:"热门", detail:"平均薪资：8-25K/月；方向：互联网/企业市场部"},
+          {name:"销售/商务/管理", desc:"收入上限高，适合敢拼的人。", tag:"高薪", detail:"平均薪资：6-50K/月；方向：各行业销售/商务"},
+          {name:"创业/项目操盘", desc:"适合有野心、能承受压力的人。", tag:"前景好", detail:"收入浮动大；方向：创业/创业公司合伙"},
+          {name:"投资/贸易/跨境电商", desc:"机会多、回报高。", tag:"自由", detail:"平均薪资：10-30K/月；方向：投资/外贸/跨境平台"}
+        ]
+      }
+    };
+
+    const loadingFunTexts = [
+      "你的性格密码正在破译中…",
+      "匹配到多个适合你的专业啦✨",
+      "性格优势分析已完成80%…",
+      "正在筛选近两年热门专业…",
+      "马上就能看到你的专属报告啦！"
+    ];
+
+    // ===== 状态变量（新增token相关）=====
+    let currentIndex = 0;
+    let answers = new Array(questions.length).fill(null);
+    let score = { A:0, B:0, C:0, D:0, E:0, F:0 };
+    let selectedMajorType = 'arts';
+    let markedQuestions = [];
+    let fontSize = 100;
+    let currentToken = ''; // 当前答题token
+
+    let questionTimer = null;
+
+    // ===== 初始化：获取URL中的token并验证 =====
+    document.addEventListener('DOMContentLoaded', function(){
+      // 获取URL中的token
+      const urlParams = new URLSearchParams(window.location.search);
+      currentToken = urlParams.get('token') || '';
+
+      progressTotal.innerText = `共${questions.length}题`;
+      anchorProgress.innerText = `1/${questions.length} 题`;
+      document.getElementById('startTips').innerText = `测评共${questions.length}题，预计耗时8-10分钟，请如实作答`;
+
+      // 如果有token，先验证有效性
+      if (currentToken) {
+        verifyToken();
+      }
+
+      checkSavedProgress();
+
+      // 移动端滑动切题
+      let touchStartX = 0;
+      document.addEventListener('touchstart', (e)=>{ touchStartX = e.changedTouches[0].screenX; });
+      document.addEventListener('touchend', (e)=>{
+        if (testBox.style.display !== 'block') return;
+        const diffX = touchStartX - e.changedTouches[0].screenX;
+        if (diffX > 50) nextQuestion();
+        else if (diffX < -50) prevQuestion();
+      });
+
+      // 键盘支持
+      document.addEventListener('keydown', function(e){
+        if (testBox.style.display !== 'block') return;
+        switch(e.key){
+          case 'ArrowLeft': prevQuestion(); break;
+          case 'ArrowRight': nextQuestion(); break;
+          case '1': case '2': case '3': case '4': case '5':
+            const idx = parseInt(e.key,10) - 1;
+            const opt = document.querySelectorAll('.option')[idx];
+            if (opt) opt.click();
+            break;
+        }
+      });
+
+      // 加载文案轮换
+      let funIndex = 0;
+      setInterval(()=>{
+        if (loadingBox.style.display === 'block'){
+          funIndex = (funIndex + 1) % loadingFunTexts.length;
+          loadingFun.innerText = loadingFunTexts[funIndex];
+        }
+      }, 2000);
+    });
+
+    // ===== 核心新增：验证token有效性 =====
+    async function verifyToken() {
+      try {
+        const res = await fetch(`/api/verify-token?token=${currentToken}`);
+        const data = await res.json();
+        
+        if (data.code !== 200 || !data.data.valid) {
+          document.getElementById('invalidTokenModal').style.display = 'flex';
+          return;
+        }
+
+        // token有效，但已答题→直接跳报告页
+        if (data.data.status === 'answered') {
+          window.location.href = `report.html?token=${currentToken}`;
+          return;
+        }
+
+        // token有效且未答题→正常显示开始页
+        showToast('答题凭证验证成功，可开始测评');
+
+      } catch (err) {
+        showToast('验证失败：' + err.message);
+        document.getElementById('invalidTokenModal').style.display = 'flex';
+      }
+    }
+
+    // ===== 核心修改：开始测评前验证token =====
+    async function startTest(){
+      // 无token→弹出购买弹窗
+      if (!currentToken) {
+        document.getElementById('purchaseModal').style.display = 'flex';
+        return;
+      }
+
+      // 有token→先验证
+      const res = await fetch(`/api/verify-token?token=${currentToken}`);
+      const data = await res.json();
+      
+      if (data.code !== 200 || !data.data.valid) {
+        document.getElementById('invalidTokenModal').style.display = 'flex';
+        return;
+      }
+
+      // token已答题→跳报告页
+      if (data.data.status === 'answered') {
+        window.location.href = `report.html?token=${currentToken}`;
+        return;
+      }
+
+      // 正常开始测评
+      startBox.style.display = 'none';
+      resultBox.style.display = 'none';
+      loadingBox.style.display = 'none';
+      testBox.style.display = 'block';
+
+      setTimeout(()=>{
+        const firstOption = document.querySelector('.option');
+        if (firstOption) showTipBubble(firstOption, '💡 提示：按真实情况选择，无对错之分', 'top');
+      }, 500);
+
+      renderQuestion();
+      startQuestionTimer();
+    }
+
+    // ===== 核心修改：提交测评结果到后端 =====
+    async function getResult(){
+      loadingBox.style.display = 'none';
+      resultBox.style.display = 'block';
+
+      const maxVal = Math.max(...Object.values(score));
+      const maxTypes = Object.entries(score).filter(([k,v])=>v===maxVal).map(([k])=>k);
+      const maxType = maxTypes[Math.floor(Math.random() * maxTypes.length)];
+      const data = typeConfig[maxType];
+
+      // 组装测评报告
+      const reportData = {
+        type: maxType,
+        name: data.name,
+        advantage: data.advantage,
+        desc: data.desc,
+        majors: data.majors,
+        jobs: data.jobs,
+        submitTime: new Date().toLocaleString()
+      };
+
+      // 渲染前端临时结果
+      resultBadge.innerText = `你的性格类型：${data.name}`;
+      typeName.innerText = data.name;
+      resultAdvantage.innerText = data.advantage;
+      resultDesc.innerText = data.desc;
+      resultCard.className = `result-card card ${maxType}`;
+      renderMajorList(data.majors.arts, majorListArts);
+      renderMajorList(data.majors.science, majorListScience);
+      renderJobList(data.jobs);
+
+      // 提交结果到后端，标记token为已答题
+      try {
+        const res = await fetch('/api/submit-quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token: currentToken,
+            answers: answers,
+            score: score,
+            report: reportData
+          })
+        });
+        const resData = await res.json();
+        if (resData.code === 200) {
+          showToast('测评提交成功！');
+          // 跳转到只读报告页
+          setTimeout(() => {
+            window.location.href = resData.data.reportUrl;
+          }, 2000);
+        } else {
+          showToast(resData.msg);
+        }
+      } catch (err) {
+        showToast('提交失败：' + err.message);
+      }
+
+      localStorage.removeItem('testProgress');
+    }
+
+    // ===== 新增：模拟购买生成token =====
+    async function simulatePurchase() {
+      try {
+        const res = await fetch('/api/generate-token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if (data.code === 200) {
+          currentToken = data.data.token;
+          closeModal('purchaseModal');
+          closeModal('invalidTokenModal');
+          showToast('购买成功！即将进入测评');
+          // 刷新页面并带上token
+          window.location.href = data.data.accessUrl;
+        } else {
+          showToast(data.msg);
+        }
+      } catch (err) {
+        showToast('购买失败：' + err.message);
+      }
+    }
+
+    // ===== 原有函数保持不变（精简展示，核心逻辑保留）=====
+    function renderQuestion(){
+      const q = questions[currentIndex];
+      questionNumber.innerText = `题目 ${currentIndex+1}/${questions.length}`;
+      questionContent.innerText = q.title;
+      questionContent.style.fontSize = `${fontSize}%`;
+
+      progressCurrent.innerText = `第${currentIndex+1}题`;
+      anchorProgress.innerText = `${currentIndex+1}/${questions.length} 题`;
+
+      const progressPercent = (currentIndex / questions.length) * 100;
+      progressFill.style.width = `${progressPercent}%`;
+
+      const remainingMinutes = Math.max(1, Math.ceil((questions.length - currentIndex) * (10 / questions.length)));
+      progressTime.innerText = `预计剩余${remainingMinutes}分钟`;
+
+      const opts = document.querySelectorAll('.option');
+      opts.forEach((el, i)=>{
+        el.classList.remove('selected');
+        el.style.fontSize = `${fontSize}%`;
+        if (answers[currentIndex] === (i+1)){
+          el.classList.add('selected');
+        }
+      });
+
+      resetQuestionTimer();
+    }
+
+    function selectScore(e, s){
+      answers[currentIndex] = s;
+      if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(40);
+      document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+      e.currentTarget.classList.add('selected');
+      
+      // 计分逻辑
+      const qType = questions[currentIndex].type;
+      score[qType] = (score[qType] || 0) + s;
+
+      setTimeout(()=>{
+        if (currentIndex < questions.length - 1){
+          currentIndex++;
+          renderQuestion();
+        } else {
+          submitTest();
+        }
+      }, 300);
+    }
+
+    function submitTest(){
+      const unanswered = answers.filter(v=>v==null).length;
+      if (unanswered > 0){
+        showToast(`还有 ${unanswered} 题未作答`);
+        return;
+      }
+      testBox.style.display = 'none';
+      resultBox.style.display = 'none';
+      loadingBox.style.display = 'block';
+      setTimeout(getResult, 2000);
+    }
+
+    function switchMajor(e, type){
+      selectedMajorType = type;
+      document.querySelectorAll('.major-tab').forEach(tab => tab.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+
+      if (type === 'arts'){
+        majorListArts.style.display = 'flex';
+        majorListScience.style.display = 'none';
+      } else {
+        majorListArts.style.display = 'none';
+        majorListScience.style.display = 'flex';
+      }
+      showToast(`已切换至${type === 'arts' ? '文科' : '理科'}专业列表`);
+    }
+
+    function restart(){
+      if (!currentToken) {
+        document.getElementById('purchaseModal').style.display = 'flex';
+        return;
+      }
+      currentIndex = 0;
+      answers = new Array(questions.length).fill(null);
+      score = { A:0, B:0, C:0, D:0, E:0, F:0 };
+      markedQuestions = [];
+      progressFill.style.width = '0%';
+      clearTimeout(questionTimer);
+      testBox.style.display = 'none';
+      loadingBox.style.display = 'none';
+      resultBox.style.display = 'none';
+      startBox.style.display = 'block';
+      localStorage.removeItem('testProgress');
+    }
+
+    function prevQuestion(){
+      if (currentIndex > 0){
+        currentIndex--;
+        renderQuestion();
+        showToast('已返回上一题');
+      } else {
+        showToast('已经是第一题啦');
+      }
+    }
+
+    function nextQuestion(){
+      if (currentIndex < questions.length - 1){
+        currentIndex++;
+        renderQuestion();
+        showToast('已跳至下一题');
+      } else {
+        showToast('已经是最后一题，准备提交…');
+        submitTest();
+      }
+    }
+
+    function markQuestion(){
+      if (!markedQuestions.includes(currentIndex)){
+        markedQuestions.push(currentIndex);
+        showToast(`已标记第${currentIndex+1}题`);
+      } else {
+        markedQuestions = markedQuestions.filter(idx => idx !== currentIndex);
+        showToast(`已取消标记第${currentIndex+1}题`);
+      }
+    }
+
+    function showMarkedQuestions(){
+      if (markedQuestions.length === 0){
+        showToast('暂无标记题目');
+        return;
+      }
+      const markedStr = markedQuestions.map(idx => `第${idx+1}题`).join('、');
+      showToast(`已标记：${markedStr}`);
+    }
+
+    function saveProgress(){
+      if (!currentToken) {
+        showToast('请先获取答题凭证');
+        return;
+      }
+      const progressData = {
+        currentIndex,
+        answers,
+        markedQuestions,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(`testProgress_${currentToken}`, JSON.stringify(progressData));
+      showToast('答题进度已保存');
+    }
+
+    function checkSavedProgress(){
+      if (!currentToken) return;
+      const saved = localStorage.getItem(`testProgress_${currentToken}`);
+      if (!saved) return;
+
+      try{
+        const p = JSON.parse(saved);
+        const sevenDays = 7 * 24 * 60 * 60 * 1000;
+        if (Date.now() - p.timestamp > sevenDays){
+          localStorage.removeItem(`testProgress_${currentToken}`);
+          return;
+        }
+
+        currentIndex = Math.max(0, Math.min(questions.length-1, p.currentIndex ?? 0));
+        answers = Array.isArray(p.answers) ? p.answers : new Array(questions.length).fill(null);
+        if (answers.length !== questions.length){
+          const fixed = new Array(questions.length).fill(null);
+          for (let i=0;i<Math.min(answers.length, fixed.length);i++) fixed[i] = answers[i];
+          answers = fixed;
+        }
+        markedQuestions = Array.isArray(p.markedQuestions) ? p.markedQuestions : [];
+
+        setTimeout(()=>{
+          const btn = document.querySelector('.start-box .btn');
+          if (btn) showTipBubble(btn, '检测到未完成的测评，点击继续答题', 'bottom');
+        }, 800);
+
+      }catch(err){
+        localStorage.removeItem(`testProgress_${currentToken}`);
+      }
+    }
+
+    function adjustFontSize(delta){
+      if (delta === 0) fontSize = 100;
+      else fontSize = Math.max(80, Math.min(120, fontSize + delta * 10));
+
+      document.querySelectorAll('.question-content, .option, .result-title, .result-desc, .major-item, .job-name, .job-desc')
+        .forEach(el => el.style.fontSize = `${fontSize}%`);
+
+      showToast(`字号已${delta > 0 ? '放大' : delta < 0 ? '缩小' : '重置'}`);
+      renderQuestion();
+    }
+
+    function renderMajorList(majors, container){
+      container.innerHTML = majors.map((m, index) => `
+        <div class="major-item ${index < 3 ? 'top3' : ''}" onclick="copyMajorName('${escapeQuotes(m)}')">
+          <i class="fas fa-check-circle"></i> ${m}
+          <i class="fas fa-copy copy-icon" onclick="event.stopPropagation(); copyMajorName('${escapeQuotes(m)}')"></i>
+        </div>
+      `).join('');
+    }
+
+    function renderJobList(jobs){
+      document.getElementById('jobBox').innerHTML = jobs.map(j => `
+        <div class="job-item" onclick="toggleJobDetail(this)">
+          <div class="job-header">
+            <div class="job-name">${j.name}</div>
+            <div class="job-tag">${j.tag}</div>
+          </div>
+          <div class="job-desc">${j.desc}</div>
+          <div class="job-detail">${j.detail}</div>
+        </div>
+      `).join('');
+    }
+
+    function copyMajorName(name){
+      if (!navigator.clipboard){
+        showToast('当前环境不支持一键复制，请手动复制');
+        return;
+      }
+      navigator.clipboard.writeText(name).then(()=>{
+        showToast(`已复制：${name}`);
+      }).catch(()=>{
+        showToast('复制失败，请手动复制');
+      });
+    }
+
+    function toggleJobDetail(el){
+      const detail = el.querySelector('.job-detail');
+      if (detail) detail.classList.toggle('show');
+    }
+
+    function showMajorHelp(){
+      document.getElementById('majorModal').style.display = 'flex';
+    }
+
+    function closeModal(id){
+      document.getElementById(id).style.display = 'none';
+    }
+
+    function showToast(msg){
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove('show'), 1800);
+    }
+
+    function showTipBubble(target, text, position='top'){
+      document.querySelectorAll('.tip-bubble').forEach(b=>b.remove());
+
+      const bubble = document.createElement('div');
+      bubble.className = 'tip-bubble';
+      bubble.innerText = text;
+
+      document.body.appendChild(bubble);
+
+      const rect = target.getBoundingClientRect();
+      const brect = bubble.getBoundingClientRect();
+
+      let top, left;
+      if (position === 'top'){
+        top = rect.top + window.scrollY - brect.height - 12;
+        left = rect.left + window.scrollX + (rect.width - brect.width)/2;
+        bubble.style.top = `${Math.max(8, top)}px`;
+        bubble.style.left = `${Math.max(8, left)}px`;
+        bubble.style.position = 'absolute';
+        bubble.style.transform = 'none';
+        bubble.style.margin = '0';
+        bubble.style.zIndex = 1000;
+        bubble.style.setProperty('--pos', 'top');
+        bubble.style.setProperty('--left', left + 'px');
+
+        const tri = document.createElement('div');
+        tri.style.position = 'absolute';
+        tri.style.width = '10px';
+        tri.style.height = '10px';
+        tri.style.background = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+        tri.style.left = '50%';
+        tri.style.bottom = '-5px';
+        tri.style.transform = 'translateX(-50%) rotate(45deg)';
+        bubble.appendChild(tri);
+      } else {
+        top = rect.bottom + window.scrollY + 12;
+        left = rect.left + window.scrollX + (rect.width - brect.width)/2;
+        bubble.style.top = `${Math.max(8, top)}px`;
+        bubble.style.left = `${Math.max(8, left)}px`;
+
+        const tri = document.createElement('div');
+        tri.style.position = 'absolute';
+        tri.style.width = '10px';
+        tri.style.height = '10px';
+        tri.style.background = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+        tri.style.left = '50%';
+        tri.style.top = '-5px';
+        tri.style.transform = 'translateX(-50%) rotate(45deg)';
+        bubble.appendChild(tri);
+      }
+
+      setTimeout(()=>bubble.remove(), 2800);
+    }
+
+    function startQuestionTimer(){
+      clearTimeout(questionTimer);
+      questionTimer = setTimeout(()=>{}, 0);
+    }
+    function resetQuestionTimer(){
+      clearTimeout(questionTimer);
+      questionTimer = setTimeout(()=>{}, 0);
+    }
+
+    function escapeQuotes(str){
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+  </script>
+</body>
+</html>
