@@ -39,7 +39,7 @@ app.post('/api/generate-token', async (req, res) => {
     data: {
       token,
       // 这里的链接后面要换成你 Vercel 的域名
-      accessUrl: `https://你的项目名.vercel.app/index.html?token=${token}`
+      accessUrl: `https://gaokao-quiz-zhanghaha1004s-projects.vercel.app/index.html?token=${token}`
     }
   });
 });
