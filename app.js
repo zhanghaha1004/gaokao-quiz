@@ -1,3 +1,5 @@
+// 加载环境变量（必须写在第一行）
+require('dotenv').config();
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 const cors = require('cors');
@@ -7,8 +9,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ================= 配置区域（请填入你自己的 Supabase 信息）=================
-const SUPABASE_URL = "https://hzxopdubmrlyhwtewhst.supabase.co";
-const SUPABASE_SERVICE_KEY = "your_actual_secret_key_here";
+// 从环境变量读取，不会泄露到GitHub
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
 // ===========================================================================
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
